@@ -1,20 +1,32 @@
 import { Link } from "react-router-dom";
 
-// pour fonctionner, le composant Link a besoin d'une props : "to"
-
 const Home = () => {
-  const productId = "2345678";
   return (
     <main>
-      <h1>Nous sommes sur la page Home</h1>
-      <Link to="/about">Lien vers la page About</Link>
-      <br />
-      <Link to="/product/2345678">Lien vers la page Product</Link>
-      <br />
-      <Link to="/product/987654">Lien vers la page Product</Link>
-      <br />
-      <Link to="/product/pantalon">Lien vers la page Product</Link>
-      <br />
+      <div className="hero">
+        <div className="hero-content">
+          <h1>Prêts à faire du tri dans vos placards ?</h1>
+          <p>Vendez les vêtements que vous ne portez plus</p>
+          <Link to="/offers" className="cta-button">
+            Voir les annonces
+          </Link>
+        </div>
+      </div>
+
+      <div className="features">
+        <div className="feature">
+          <h3>Vendez en toute simplicité</h3>
+          <p>Publiez vos articles en quelques clics</p>
+        </div>
+        <div className="feature">
+          <h3>Achetez en toute sécurité</h3>
+          <p>Des milliers d'articles vérifiés</p>
+        </div>
+        <div className="feature">
+          <h3>Économisez et gagnez</h3>
+          <p>Mode d'occasion, prix imbattables</p>
+        </div>
+      </div>
     </main>
   );
 };

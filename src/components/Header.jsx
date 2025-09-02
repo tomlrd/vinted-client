@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../assets/styles/Header.css";
 import Filters from "./Filters.jsx";
 import LoginModal from "./LoginModal.jsx";
 import SignupModal from "./SignupModal.jsx";

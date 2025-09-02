@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../assets/styles/UserBadge.css";
 
 const UserBadge = ({ user, size = "default" }) => {
   if (!user) {

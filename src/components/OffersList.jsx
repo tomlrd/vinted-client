@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../assets/styles/OffersList.css";
 import { offersService } from "../services/api.js";
 import CardOffer from "./CardOffer.jsx";
 

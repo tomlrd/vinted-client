@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "../assets/styles/Offer.css";
 import UserBadge from "../components/UserBadge.jsx";
 import { offersService } from "../services/api.js";
 

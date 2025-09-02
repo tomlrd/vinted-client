@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../assets/styles/Filters.css";
 
 const Filters = ({ onFiltersChange, currentFilters }) => {
   const [filters, setFilters] = useState({

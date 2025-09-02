@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../assets/styles/Modals.css";
 import { authService } from "../services/api.js";
 import { cookieService } from "../services/cookieService.js";
 

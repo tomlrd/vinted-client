@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../assets/styles/Home.css";
 import OffersList from "../components/OffersList.jsx";
 
 const Home = ({ filters }) => {

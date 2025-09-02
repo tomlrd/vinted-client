@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { authService } from "../services/api.js";
 import { cookieService } from "../services/cookieService.js";
+import "../assets/styles/Modals.css";
 
 const SignupModal = ({ isOpen, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({

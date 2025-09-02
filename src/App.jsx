@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import "./App.css";
 import { Header } from "./components";
-import AddOffer from "./pages/AddOffer";
-import Home from "./pages/Home";
-import Offer from "./pages/Offer";
-import Payment from "./pages/Payment";
-import UserProfile from "./pages/UserProfile";
 import { userService } from "./services/api.js";
 import { cookieService } from "./services/cookieService.js";
+
+// Lazy Loading des composants
+const Home = lazy(() => import("./pages/Home"));
+const AddOffer = lazy(() => import("./pages/AddOffer"));
+const Offer = lazy(() => import("./pages/Offer"));
+const Payment = lazy(() => import("./pages/Payment"));
+const UserProfile = lazy(() => import("./pages/UserProfile"));
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -67,19 +68,21 @@ function App() {
         onFiltersChange={handleFiltersChange}
         currentFilters={filters}
       />
-      <Routes>
-        <Route path="/" element={<Home filters={filters} />} />
-        <Route
-          path="/offer/:id"
-          element={<Offer currentUser={currentUser} />}
-        />
-        <Route
-          path="/add-offer"
-          element={<AddOffer currentUser={currentUser} />}
-        />
-        <Route path="/payment/:offerId" element={<Payment />} />
-        <Route path="/user/:id" element={<UserProfile />} />
-      </Routes>
+      <Suspense fallback={<div className="loading-spinner">Chargement...</div>}>
+        <Routes>
+          <Route path="/" element={<Home filters={filters} />} />
+          <Route
+            path="/offer/:id"
+            element={<Offer currentUser={currentUser} />}
+          />
+          <Route
+            path="/add-offer"
+            element={<AddOffer currentUser={currentUser} />}
+          />
+          <Route path="/payment/:offerId" element={<Payment />} />
+          <Route path="/user/:id" element={<UserProfile />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

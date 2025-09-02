@@ -2,6 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "../assets/styles/Payment.css";
 import CheckoutForm from "../components/CheckoutForm";
 import { offersService } from "../services/api.js";
 

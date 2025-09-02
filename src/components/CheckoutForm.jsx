@@ -4,9 +4,13 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import "../assets/styles/CheckoutForm.css";
 import { offersService } from "../services/api.js";
 
 const CheckoutForm = ({ offer, onPaymentCompleted }) => {
+  const buyerProtectionFee = 1.0; // Frais protection acheteurs
+  const shippingFee = 2.0; // Frais de port
+
   // Permet de faire une requête à Stripe pour confirmer le paiement
   const stripe = useStripe();
   // Permet de récupérer le contenu des inputs
@@ -40,7 +44,8 @@ const CheckoutForm = ({ offer, onPaymentCompleted }) => {
 
     try {
       // Calculer le total avec les frais
-      const totalAmount = offer.product_price + 3; // Prix + frais protection (1€) + frais port (2€)
+      const totalAmount =
+        offer.product_price + buyerProtectionFee + shippingFee;
 
       // Demande au backend de créer l'intention de paiement, il nous renvoie le clientSecret
       const response = await offersService.createPayment({

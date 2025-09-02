@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
+import "../assets/styles/AddOffer.css";
 import { offersService } from "../services/api.js";
 
 const AddOffer = ({ currentUser }) => {

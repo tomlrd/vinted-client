@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../assets/styles/CardOffer.css";
 import UserBadge from "./UserBadge.jsx";
 
 const CardOffer = ({ offer }) => {

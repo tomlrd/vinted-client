@@ -7,10 +7,7 @@ import CheckoutForm from "../components/CheckoutForm";
 import { offersService } from "../services/api.js";
 
 // Cette ligne permet de vous connecter à votre compte Stripe en fournissant votre clef publique
-const stripePromise = loadStripe(
-  import.meta.env.VITE_STRIPE_PUBLIC_KEY ||
-    "pk_test_51S2uYWE8Bs6v6QxaAPqMVsYulDAG357j9K6sMShCHyJMwmZvqIMspWuPzZBlWvWmWp0rGBtEEtloy4J4pRNgZIZ100ExaR5gjx"
-);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const Payment = () => {
   const { offerId } = useParams();

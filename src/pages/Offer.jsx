@@ -129,36 +129,36 @@ const Offer = ({ currentUser }) => {
 
             {/* Informations principales de l'offre */}
             <div className="offer-main-details">
-              {offer.product_size && (
+              {offer.product_details?.product_size && (
                 <div className="detail-item">
                   <span className="detail-label">Taille :</span>
-                  <span className="detail-value">{offer.product_size}</span>
+                  <span className="detail-value">{offer.product_details.product_size}</span>
                 </div>
               )}
-              {offer.product_condition && (
+              {offer.product_details?.product_condition && (
                 <div className="detail-item">
                   <span className="detail-label">État :</span>
                   <span className="detail-value">
-                    {offer.product_condition}
+                    {offer.product_details.product_condition}
                   </span>
                 </div>
               )}
-              {offer.product_brand && (
+              {offer.product_details?.product_brand && (
                 <div className="detail-item">
                   <span className="detail-label">Marque :</span>
-                  <span className="detail-value">{offer.product_brand}</span>
+                  <span className="detail-value">{offer.product_details.product_brand}</span>
                 </div>
               )}
-              {offer.product_color && (
+              {offer.product_details?.product_color && (
                 <div className="detail-item">
                   <span className="detail-label">Couleur :</span>
-                  <span className="detail-value">{offer.product_color}</span>
+                  <span className="detail-value">{offer.product_details.product_color}</span>
                 </div>
               )}
-              {offer.product_city && (
+              {offer.product_details?.product_city && (
                 <div className="detail-item">
-                  <span className="detail-label">Localisation :</span>
-                  <span className="detail-value">{offer.product_city}</span>
+                  <span className="detail-label">Emplacement :</span>
+                  <span className="detail-value">{offer.product_details.product_city}</span>
                 </div>
               )}
             </div>

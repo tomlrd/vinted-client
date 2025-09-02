@@ -36,11 +36,11 @@ const CardOffer = ({ offer }) => {
       <div className="offer-info">
         <h3 className="offer-title">{offer.product_name}</h3>
         <p className="offer-price">{offer.product_price} €</p>
-        {offer.product_size && (
-          <p className="offer-size">{offer.product_size}</p>
+        {offer.product_details?.product_size && (
+          <p className="offer-size">{offer.product_details.product_size}</p>
         )}
-        {offer.product_brand && (
-          <p className="offer-brand">{offer.product_brand}</p>
+        {offer.product_details?.product_brand && (
+          <p className="offer-brand">{offer.product_details.product_brand}</p>
         )}
       </div>
     </div>

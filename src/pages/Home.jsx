@@ -1,32 +1,35 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import OffersList from "../components/OffersList.jsx";
 
-const Home = () => {
+const Home = ({ filters }) => {
+  const navigate = useNavigate();
+
+  const handleStartSelling = () => {
+    // On navigue directement vers la page d'ajout d'offre
+    // La vérification d'authentification se fera dans AddOffer
+    navigate("/add-offer");
+  };
+
   return (
     <main>
       <div className="hero">
         <div className="hero-content">
-          <h1>Prêts à faire du tri dans vos placards ?</h1>
-          <p>Vendez les vêtements que vous ne portez plus</p>
-          <Link to="/offers" className="cta-button">
-            Voir les annonces
-          </Link>
+          <div className="hero-card">
+            <h1>Prêts à faire du tri dans vos placards ?</h1>
+            <p>Vendez les vêtements que vous ne portez plus</p>
+            <div className="hero-buttons">
+              <button
+                onClick={handleStartSelling}
+                className="cta-button-secondary"
+              >
+                Commencer à vendre
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="features">
-        <div className="feature">
-          <h3>Vendez en toute simplicité</h3>
-          <p>Publiez vos articles en quelques clics</p>
-        </div>
-        <div className="feature">
-          <h3>Achetez en toute sécurité</h3>
-          <p>Des milliers d'articles vérifiés</p>
-        </div>
-        <div className="feature">
-          <h3>Économisez et gagnez</h3>
-          <p>Mode d'occasion, prix imbattables</p>
-        </div>
-      </div>
+      <OffersList filters={filters} />
     </main>
   );
 };

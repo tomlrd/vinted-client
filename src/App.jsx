@@ -1,32 +1,85 @@
+import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import About from "./pages/About";
+import { Header } from "./components";
+import AddOffer from "./pages/AddOffer";
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
-import Offers from "./pages/Offers";
-import Product from "./pages/Product";
+import Payment from "./pages/Payment";
+import UserProfile from "./pages/UserProfile";
+import { userService } from "./services/api.js";
+import { cookieService } from "./services/cookieService.js";
 
 function App() {
-  // Le composant App.jsx ne contiendra plus que le ROUTER
-  // Le router contient un composant Routes, qui contiendra chaque Route
-  // Chaque Route a deux props : "path", et "element"
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    title: "",
+    priceMin: 0,
+    priceMax: 500,
+    sort: "",
+    page: 1,
+    limit: 8,
+  });
 
-  // N'utilisez les balises "a" que dans le cas ou vous voulez rediriger votre utilisateur sur un site externe !
-  // Pour les liens menant à une autre page, on préférera le Link (car la page n'est pas rechargée)
-  // Ce qui est mis entre la balise ouvrante et la balise fermante du Link, sera clickable, d'une, et redirigera selon le path donné à la props "to"
+  // Charger l'utilisateur au montage si token présent
+  useEffect(() => {
+    const loadUser = async () => {
+      const token = cookieService.getToken();
+      if (token) {
+        try {
+          const userData = await userService.getCurrentUser();
+          setCurrentUser(userData);
+        } catch (error) {
+          console.error("Erreur lors du chargement de l'utilisateur:", error);
+          if (error.response?.status === 401) {
+            cookieService.logout();
+            setCurrentUser(null);
+          }
+        }
+      }
+      setLoading(false);
+    };
+
+    loadUser();
+  }, []);
+
+  const handleLogout = () => {
+    cookieService.logout();
+    setCurrentUser(null);
+  };
+
+  const handleLoginSuccess = (userData) => {
+    setCurrentUser(userData);
+  };
+
+  const handleFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+  };
+
   return (
     <Router>
-      <Header />
+      <Header
+        currentUser={currentUser}
+        loading={loading}
+        onLogout={handleLogout}
+        onLoginSuccess={handleLoginSuccess}
+        onFiltersChange={handleFiltersChange}
+        currentFilters={filters}
+      />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/offers" element={<Offers />} />
-        <Route path="/offer/:id" element={<Offer />} />
+        <Route path="/" element={<Home filters={filters} />} />
+        <Route
+          path="/offer/:id"
+          element={<Offer currentUser={currentUser} />}
+        />
+        <Route
+          path="/add-offer"
+          element={<AddOffer currentUser={currentUser} />}
+        />
+        <Route path="/payment/:offerId" element={<Payment />} />
+        <Route path="/user/:id" element={<UserProfile />} />
       </Routes>
-      <Footer />
     </Router>
   );
 }
